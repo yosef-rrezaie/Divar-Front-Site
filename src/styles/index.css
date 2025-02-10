@@ -1,4 +1,4 @@
-@import "tailwindcss";
+/* @import "tailwindcss"; */
 
 :root {
   font-family: "Vazir", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -22,7 +22,7 @@ body {
 a {
   text-decoration: inherit;
   color: inherit;
-}
+  }
 
 button,
 input,

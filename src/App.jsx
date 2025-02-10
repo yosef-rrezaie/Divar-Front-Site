@@ -1,4 +1,6 @@
 import AuthPage from "./pages/AuthPage";
+import "./styles/fonts.css"
+
 
 function App() {
   return (
