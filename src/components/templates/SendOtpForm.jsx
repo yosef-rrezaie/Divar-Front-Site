@@ -4,24 +4,20 @@ import axios from "axios";
 
 function SendOtpForm({ mobile, setMobile, setStep }) {
   const [response, setResponse] = useState(null);
- 
+
   function submitHandler(e) {
     e.preventDefault();
 
     if (mobile.length !== 11) return;
 
-     try {
-      const res = api
-        .post("auth/send-otp", { mobile })
-        .then((res) => {
-            setStep(2)
-            console.log(res)
-        });
-    } catch {
-      return { erorr };
+    try {
+      const res = api.post("auth/send-otp", { mobile }).then((res) => {
+        setStep(2);
+        console.log(res);
+      });
+    } catch (erorr) {
+      console.log(erorr);
     }
-   
-
 
     // axios.post("https://jsonplaceholder.typicode.com/posts" , {"userId" : 20}).then(res => console.log(res))
   }
