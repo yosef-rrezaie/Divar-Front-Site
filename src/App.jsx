@@ -1,14 +1,13 @@
-import AuthPage from "./pages/AuthPage";
-import "./styles/fonts.css"
-
+import { BrowserRouter } from "react-router-dom";
+import "./styles/fonts.css";
+import Router from "./router/Router";
 
 function App() {
   return (
-    <div>
-      <h1>پروژه دیوار</h1>
-      <AuthPage/>
-    </div>
-  )
+    <BrowserRouter>
+      <Router />
+    </BrowserRouter>
+  );
 }
 
 export default App;
