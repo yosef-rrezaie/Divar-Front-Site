@@ -1,5 +1,6 @@
 import React from "react";
 import api from "../../../configs/api";
+import setCookie from "../../../configs/cookies";
 
 function CheckOtpForm({ code, setCode, mobile, setStep }) {
   function submitHandler(e) {
@@ -9,7 +10,7 @@ function CheckOtpForm({ code, setCode, mobile, setStep }) {
 
     try {
       const res = api.post("auth/check-otp", { mobile, code }).then((res) => {
-        console.log(res);
+        setCookie(res.data)
       });
     } catch (erorr) {
       console.log(erorr);

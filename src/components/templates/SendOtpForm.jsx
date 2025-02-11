@@ -4,16 +4,19 @@ import axios from "axios";
 
 function SendOtpForm({ mobile, setMobile, setStep }) {
   const [response, setResponse] = useState(null);
+  const [loading , setLoading] = useState(0)
 
   function submitHandler(e) {
+    setLoading(1)
     e.preventDefault();
 
     if (mobile.length !== 11) return;
 
     try {
-      const res = api.post("auth/send-otp", { mobile }).then((res) => {
+      api.post("auth/send-otp", { mobile }).then((res) => {
         setStep(2);
         console.log(res);
+        setResponse(res)
       });
     } catch (erorr) {
       console.log(erorr);
@@ -23,6 +26,7 @@ function SendOtpForm({ mobile, setMobile, setStep }) {
   }
   return (
     <div>
+      {loading===1 ? <p>Loading...</p> : null}
       <form onSubmit={submitHandler}>
         <p>ورود به حساب کاربری</p>
         <p>
