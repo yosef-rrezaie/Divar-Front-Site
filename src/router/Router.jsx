@@ -1,12 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "../pages/HomePage";
 import DashboardPage from "../pages/DashboardPage";
 import AdminPage from "../pages/AdminPage";
 import PageNotFound from "../pages/PageNotFound";
 import AuthPage from "../pages/AuthPage";
+import { use } from "react";
+import { useQuery } from "@tanstack/react-query";
+import api from "../../configs/api";
+import { getCookie } from "../../configs/cookies";
 
 function Router() {
+  const accessToken = getCookie();
+  const { data, isLoading } = useQuery({
+    queryKey: ["profile"],
+    queryFn: () =>
+      api.get("user/whoami", {
+        headers: { Authorization: `bearer ${accessToken}` },
+      }),
+  });
+
+  console.log(data);
+
   return (
     <>
       <Routes>
