@@ -1,6 +1,6 @@
 import React from "react";
 import api from "../../../configs/api";
-import setCookie from "../../../configs/cookies";
+import {setCookie} from "../../../configs/cookies";
 
 function CheckOtpForm({ code, setCode, mobile, setStep }) {
   function submitHandler(e) {
