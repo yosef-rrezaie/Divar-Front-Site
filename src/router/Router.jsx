@@ -14,10 +14,7 @@ function Router() {
   const accessToken = getCookie();
   const { data, isLoading } = useQuery({
     queryKey: ["profile"],
-    queryFn: () =>
-      api.get("user/whoami", {
-        headers: { Authorization: `bearer ${accessToken}` },
-      }),
+    queryFn: () => api.get("user/whoami"),
   });
 
   console.log(data);
