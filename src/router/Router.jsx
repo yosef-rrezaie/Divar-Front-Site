@@ -11,7 +11,6 @@ import api from "../../configs/api";
 import { getCookie } from "../../configs/cookies";
 
 function Router() {
-  const accessToken = getCookie();
   const { data, isLoading } = useQuery({
     queryKey: ["profile"],
     queryFn: () => api.get("user/whoami"),

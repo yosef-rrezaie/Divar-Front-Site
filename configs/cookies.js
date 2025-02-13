@@ -8,10 +8,12 @@ const setCookie = (tokens) => {
 };
 
 const getCookie = (cookieName) => {
-  return document.cookie
-    .split(";")
-    .find((token) => token.trim().split("=")[0])
-    .split("=")[1];
+  if (document.cookie) {
+    return document.cookie
+      .split(";")
+      .find((token) => token.trim().split("=")[0])
+      .split("=")[1];
+  }
 };
 
 export { setCookie, getCookie };
