@@ -1,8 +1,15 @@
 import React from "react";
 import api from "../../../configs/api";
-import {setCookie} from "../../../configs/cookies";
+import { setCookie } from "../../../configs/cookies";
+import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
 
 function CheckOtpForm({ code, setCode, mobile, setStep }) {
+  const navigate = useNavigate();
+  const { refetch } = useQuery({
+    queryKey: ["profile"],
+    queryFn: () => api.get("user/whoami"),
+  });
   function submitHandler(e) {
     e.preventDefault();
 
@@ -10,7 +17,9 @@ function CheckOtpForm({ code, setCode, mobile, setStep }) {
 
     try {
       const res = api.post("auth/check-otp", { mobile, code }).then((res) => {
-        setCookie(res.data)
+        setCookie(res.data);
+        navigate("/");
+        refetch();
       });
     } catch (erorr) {
       console.log(erorr);
