@@ -5,10 +5,8 @@ import DashboardPage from "../pages/DashboardPage";
 import AdminPage from "../pages/AdminPage";
 import PageNotFound from "../pages/PageNotFound";
 import AuthPage from "../pages/AuthPage";
-import { use } from "react";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../configs/api";
-import { getCookie } from "../../configs/cookies";
 
 function Router() {
   const { data, isLoading } = useQuery({
@@ -20,7 +18,7 @@ function Router() {
 
   //09189990099 : ADMIN phone
 
-  if(isLoading) return <p>isLoading...</p>
+  // if(isLoading) return <p>isLoading...</p>
 
   return (
     <>

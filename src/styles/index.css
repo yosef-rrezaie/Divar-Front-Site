@@ -1,4 +1,4 @@
-/* @import "tailwindcss"; */
+@import "tailwindcss";
 
 :root {
   font-family: "Vazir", Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -6,7 +6,7 @@
   line-height: 1.5;
 }
 
-body {
+/* body {
   margin: auto;
   max-width: 1400px;
   min-height: 100vh;
@@ -28,4 +28,4 @@ button,
 input,
 select {
   font-family: inherit;
-}
+} */
