@@ -6,6 +6,16 @@
   line-height: 1.5;
 }
 
+/* *{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+} */
+
+@import "tailwindcss";
+
+
+
 /* body {
   margin: auto;
   max-width: 1400px;
@@ -13,7 +23,7 @@
   padding: 10px;
 }
 
-* {
+ {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -29,3 +39,4 @@ input,
 select {
   font-family: inherit;
 } */
+
