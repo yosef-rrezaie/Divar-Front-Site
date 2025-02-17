@@ -14,8 +14,6 @@ function Router({ step, setStep }) {
     queryFn: () => api.get("user/whoami"),
   });
 
-  console.log({ isLoading, data });
-  console.log(data?.data?.role);
 
   if (isLoading) return <p>Loading...</p>;
 
