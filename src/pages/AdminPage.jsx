@@ -1,12 +1,14 @@
-import React from 'react'
-import CategoryForm from '../components/templates/CategoryForm'
+import React from "react";
+import CategoryForm from "../components/templates/CategoryForm";
+import CategoryList from "../components/templates/CategoryList";
 
 function AdminPage() {
   return (
     <div>
-      <CategoryForm/>
+      <CategoryList />
+      <CategoryForm />
     </div>
-  )
+  );
 }
 
-export default AdminPage
+export default AdminPage;
