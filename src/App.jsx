@@ -3,8 +3,10 @@ import "./styles/fonts.css";
 import Router from "./router/Router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Layout from "./layout/layout";
+import { useState } from "react";
 
 function App() {
+  const [step, setStep] = useState(1);
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -19,7 +21,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BrowserRouter>
         <Layout>
-          <Router />
+          <Router step={step} setStep={setStep} />
         </Layout>
       </BrowserRouter>
     </QueryClientProvider>
