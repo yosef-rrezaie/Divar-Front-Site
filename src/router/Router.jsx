@@ -8,17 +8,16 @@ import AuthPage from "../pages/AuthPage";
 import { useQuery } from "@tanstack/react-query";
 import api from "../../configs/api";
 
-function Router() {
+function Router({ step, setStep }) {
   const { data, isLoading } = useQuery({
     queryKey: ["profile"],
     queryFn: () => api.get("user/whoami"),
   });
 
-  console.log(data);
+  console.log({ isLoading, data });
+  console.log(data?.data?.role);
 
-  //09189990099 : ADMIN phone
-
-  // if(isLoading) return <p>isLoading...</p>
+  if (isLoading) return <p>Loading...</p>;
 
   return (
     <>
@@ -30,15 +29,21 @@ function Router() {
         />
         <Route
           path="/auth"
-          element={data ? <Navigate to="/dashboard" /> : <AuthPage />}
+          element={
+            data ? (
+              <Navigate to="/dashboard" />
+            ) : (
+              <AuthPage step={step} setStep={setStep} />
+            )
+          }
         />
         <Route
           path="/admin"
           element={
-            data && data.data.role === "ADMIN" ? (
+            !isLoading && data?.data?.role === "ADMIN" ? (
               <AdminPage />
             ) : (
-              <Navigate to="/" />
+              <Navigate to="/" replace />
             )
           }
         />

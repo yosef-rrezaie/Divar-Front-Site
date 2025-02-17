@@ -3,26 +3,22 @@ import api from "../../../configs/api";
 import axios from "axios";
 
 function SendOtpForm({ mobile, setMobile, setStep }) {
-  const [response, setResponse] = useState(null);
-  const [loading, setLoading] = useState(0);
-
   function submitHandler(e) {
-    setLoading(1);
     e.preventDefault();
-
     if (mobile.length !== 11) return;
 
-    try {
-      api.post("auth/send-otp", { mobile }).then((res) => {
-        setStep(2);
-        console.log(res);
-        setResponse(res);
-      });
-    } catch (erorr) {
-      console.log(erorr);
+    async function sendOtop() {
+      try {
+        const response = await api.post("auth/send-otp", { mobile });
+        console.log(response);
+        if (response) {
+          setStep(2);
+        }
+      } catch (erorr) {
+        console.log(erorr.message);
+      }
     }
-
-    // axios.post("https://jsonplaceholder.typicode.com/posts" , {"userId" : 20}).then(res => console.log(res))
+    sendOtop();
   }
   return (
     <div className="mt-[100px]">
