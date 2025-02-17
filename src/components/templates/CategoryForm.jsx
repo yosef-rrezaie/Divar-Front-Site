@@ -1,4 +1,6 @@
+import { useMutation } from "@tanstack/react-query";
 import React, { useState } from "react";
+import api from "../../../configs/api";
 
 function CategoryForm() {
   const [form, setForm] = useState({
@@ -6,12 +8,22 @@ function CategoryForm() {
     slug: "",
     icon: "",
   });
+
+  const { isPending, data, mutate } = useMutation({
+    mutationFn: (data) => {
+      return api.post("category", data);
+    },
+  });
+
+  console.log({ isPending, data });
   function changeHandler(e) {
     setForm({ ...form, [e.target.name]: e.target.value });
   }
 
   function submitHandler(e) {
     e.preventDefault();
+    if (!form.name || !form.icon || !form.slug) return;
+    mutate(form);
     console.log(form);
   }
 
@@ -24,9 +36,11 @@ function CategoryForm() {
         دسته بندی جدید
       </h3>
       <p
-        className="bg-[#a62626] mb-[20px] text-white p-[5px] 
-      text-center rounded-[5px] hidden"
-      ></p>
+        className={`bg-[#a62626] mb-[20px] text-white p-[5px] 
+      text-center rounded-[5px] ${data?.status === 201 ? "block" : "hidden"}`}
+      >
+        دسته بندی با موفقیت اضافه شد
+      </p>
       <label htmlFor="name" className="block text-[.9rem] mb-[10px]">
         اسم دسته بندی
       </label>
