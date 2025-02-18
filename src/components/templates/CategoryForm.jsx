@@ -1,9 +1,16 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import api from "../../../configs/api";
 
 function CategoryForm() {
-    const queryClient = useQueryClient()
+  useEffect(() => {
+    fetch("http://ip-api.com/json/")
+      .then((res) => res.json())
+      .then((data) => console.log(data)); // اطلاعات مثل کشور، شهر و ISP
+  }, []);
+
+
+  const queryClient = useQueryClient();
   const [form, setForm] = useState({
     name: "",
     slug: "",
@@ -13,7 +20,8 @@ function CategoryForm() {
   const { isPending, data, mutate } = useMutation({
     mutationFn: (data) => {
       return api.post("category", data);
-    }, onSuccess : ()=> queryClient.invalidateQueries("get-categories")
+    },
+    onSuccess: () => queryClient.invalidateQueries("get-categories"),
   });
 
   console.log({ isPending, data });
