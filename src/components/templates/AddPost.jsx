@@ -1,6 +1,8 @@
 import { useQuery } from "@tanstack/react-query";
 import React, { useState } from "react";
 import api from "../../../configs/api";
+import { getCookie } from "../../../configs/cookies";
+import axios from "axios";
 
 function AddPost() {
   const [form, setForm] = useState({
@@ -27,10 +29,29 @@ function AddPost() {
     }
   }
 
-  console.log(form);
+  // we cant send files and images with json so we use formData
 
+  console.log(form);
   function addHandler(e) {
     e.preventDefault();
+    const formData = new FormData();
+    for (let i in form) {
+      formData.append(i, form[i]);
+    }
+
+    for (let pair of formData.entries()) {
+      console.log(pair[0] + ": " + pair[1]);
+    }
+    const token = getCookie("accessToken");
+    axios
+      .post("http://localhost:3400/post/create", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `bearer ${token}`,
+        },
+      })
+      .then((res) => console.log(res))
+      .catch((erorr) => console.log(erorr));
   }
 
   return (
@@ -51,7 +72,7 @@ function AddPost() {
         توضیحات
       </label>
       <textarea
-        name="conttent"
+        name="content"
         id="content"
         className="block w-[300px] p-[5px] border border-solid border-[#eaeaea] rounded-[5px] mb-[30px] 
         focus:outline-none h-[100px]"
@@ -60,7 +81,7 @@ function AddPost() {
         قیمت
       </label>
       <input
-        type="amount"
+        type="number"
         name="amount"
         id="amount"
         className="block w-[300px] p-[5px] border border-solid border-[#eaeaea] rounded-[5px] mb-[30px] focus:outline-none"
@@ -69,7 +90,7 @@ function AddPost() {
         شهر
       </label>
       <input
-        type="city"
+        type="input"
         name="city"
         id="city"
         className="block w-[300px] p-[5px] border border-solid border-[#eaeaea] rounded-[5px] mb-[30px] focus:outline-none"
@@ -98,7 +119,7 @@ function AddPost() {
         className="block w-[300px] p-[5px] border border-solid border-[#eaeaea] rounded-[5px] mb-[30px] focus:outline-none"
       />
       <button
-        onClick={() => addHandler}
+        onClick={addHandler}
         className="bg-[#a62626]
        text-white border-none pt-[10px] pb-[10px] pr-[25px] pl-[25px]
         rounded-[5px] text-[.9rem] cursor-pointer"
