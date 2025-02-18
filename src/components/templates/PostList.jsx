@@ -25,10 +25,11 @@ function PostList() {
                 <span>{post?.options?.content}</span>
               </div>
               <div>
-                <p>{post.createdAt}</p>
-                <p>{post.amount} تومان</p>
+                <p>{new Date(post.createdAt).toLocaleDateString("fa-IR")}</p>
+                <p>{post.amount.toLocaleString()} تومان</p>
               </div>
             </div>
+            // <p>012</p>
           ))}
         </>
       )}
