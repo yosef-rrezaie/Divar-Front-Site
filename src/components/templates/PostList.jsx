@@ -21,7 +21,7 @@ function PostList() {
           >
             آگهی های شما
           </h3>
-          {data.data.posts.map((post) => (
+          {data?.data?.posts.map((post) => (
             <div key={post._id} className="flex items-center border-[2px] border-solid 
             border-[#eaeaea] rounded-[5px] mt-[10px] mb-[10px] p-[5px]  ">
               {/* <img src={`http://localhost:3400/${post.images[0]}`} /> */}
