@@ -25,6 +25,7 @@ function AddPost() {
     if (name !== images) {
       setForm({ ...form, [name]: e.target.value });
     } else {
+      console.log(e.target.files);
       setForm({ ...form, [name]: e.target.files[0] });
     }
   }
